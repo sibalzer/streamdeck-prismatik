@@ -1,0 +1,47 @@
+{
+  "Actions": [
+    {
+      "Icon": "Images/OnOff",
+      "Name": "Toggle On/Off",
+      "States": [
+        {
+          "Image": "Images/On",
+          "TitleAlignment": "bottom",
+          "FontSize": "9",
+          "Title": "Prismatic on",
+          "Name": "On"
+        },
+        {
+          "Image": "Images/Off",
+          "TitleAlignment": "bottom",
+          "FontSize": "9",
+          "Title": "Prismatic off",
+          "Name": "Off"
+        }
+      ],
+      "SupportedInMultiActions": true,
+      "Tooltip": "Toggles the On/Off status.",
+      "UUID": "de.simonbalzer.streamdeck-prismatic.toggleonoff",
+      "PropertyInspectorPath": "PropertyInspector/ToggleInputMute/ToggleInputMute.html"
+    }
+  ],
+  "Author": "sibalzer",
+  "Description": "Allows you to interact with the Prismatik Ambilight via the API with your Stream Deck",
+  "Name": "Prismatik Ambilight",
+  "Icon": "Images/pluginIcon",
+  "URL": "https://github.com/sibalzer/streamdeck-prismatik",
+  "Version": "1.0",
+  "CodePath": "de.simonbalzer.streamdeck-prismatic",
+  "Category": "[sibalzer] Prismatik Ambilight",
+  "CategoryIcon": "Images/categoryIcon",
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "4.3"
+  }
+}
