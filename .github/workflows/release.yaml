@@ -1,0 +1,32 @@
+name: Release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-tag-release:
+    name: Build, tag, and release Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: Restore dependencies
+        run: |
+          cd streamdeck-prismatik
+          dotnet restore
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+      - name: Publish Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Development Build"
+          files: |
+            LICENSE.txt
+            streamdeck-prismatik/bin/Release/*
