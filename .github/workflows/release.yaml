@@ -42,5 +42,5 @@ jobs:
           prerelease: false
           title: "Release"
           files: |
-            LICENSE.txt
+            LICENSE
             streamdeck-prismatik/bin/Release/streamdeck-prismatik.sdPlugin

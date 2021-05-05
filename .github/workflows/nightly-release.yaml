@@ -32,5 +32,5 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            LICENSE.txt
-            streamdeck-prismatik/bin/Release/sdPlugin
+            LICENSE
+            streamdeck-prismatik/bin/Release/streamdeck-prismatik.sdPlugin
