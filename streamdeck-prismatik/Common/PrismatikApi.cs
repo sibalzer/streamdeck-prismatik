@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Threading;
 using PrimS.Telnet;
 
-namespace sibalzer.streamdeck.prismatik.Helpers
+namespace sibalzer.streamdeck.prismatik.Common
 {
     internal static class PrismatikApiClient
     {
@@ -127,7 +127,22 @@ namespace sibalzer.streamdeck.prismatik.Helpers
                 return useResponse;
             }
         }
+        public static string GetStatus()
+        {
+            lock (ro_PRISMATIC_CLIENT_LOCK_OBJ)
+            {
+                if (!PRISMATIC_CLIENT.IsConnected) return "";
 
+                if (!Lock()) return "";
+
+                PRISMATIC_CLIENT.WriteLine("getstatus");
+                var useResponse = PRISMATIC_CLIENT.ReadAsync().Result;
+                useResponse = (useResponse.Replace("status:", ""));
+
+                Unlock();
+                return useResponse;
+            }
+        }
         public static bool SetBrightness(uint brightness)
         {
             lock (ro_PRISMATIC_CLIENT_LOCK_OBJ)

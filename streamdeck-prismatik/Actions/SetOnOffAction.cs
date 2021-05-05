@@ -12,27 +12,16 @@ using sibalzer.streamdeck.prismatik.Common;
 
 namespace sibalzer.streamdeck.prismatik
 {
-    [PluginActionId("prismatik_streamdeck.switchprofilaction")]
-    public class SwitchProfilAction : PluginBase
+    [PluginActionId("prismatik_streamdeck.setonoffsetting")]
+    public class SetOnOffAction : PluginBase
     {
-
         private GlobalSettings global;
         private class PluginSettings
         {
             public static PluginSettings CreateDefaultSettings()
             {
-                var instance = new PluginSettings
-                {
-                    ProfilA = string.Empty,
-                    ProfilB = string.Empty,                
-                };
-
-                return instance;
+                return new PluginSettings();
             }
-            [JsonProperty(PropertyName = "profilA")]
-            public string ProfilA { get; set; }
-            [JsonProperty(PropertyName = "profilB")]
-            public string ProfilB { get; set; }
         }
 
         #region Private Members
@@ -40,7 +29,7 @@ namespace sibalzer.streamdeck.prismatik
         private PluginSettings settings;
 
         #endregion
-        public SwitchProfilAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
+        public SetOnOffAction(SDConnection connection, InitialPayload payload) : base(connection, payload)
         {
             if (payload.Settings == null || payload.Settings.Count == 0)
             {
@@ -70,9 +59,20 @@ namespace sibalzer.streamdeck.prismatik
                     if (PrismatikApiClient.PRISMATIC_CLIENT == null) return;
 
                     if (payload.IsInMultiAction)
-                        await ApiSetProfilAction((int) payload.UserDesiredState);
+                    {
+                        if (payload.UserDesiredState == 0)
+                            PrismatikApiClient.SetStatus(true);
+                        if (payload.UserDesiredState == 1)
+                            PrismatikApiClient.SetStatus(false);
+                    }
                     else
-                        await ApiSetProfilAction();
+                    {
+                        var currStatus = PrismatikApiClient.GetStatus();
+                        if (currStatus != "on")
+                            PrismatikApiClient.SetStatus(true);
+                        else
+                            PrismatikApiClient.SetStatus(false);
+                    }
 
                 }
             }
@@ -93,7 +93,8 @@ namespace sibalzer.streamdeck.prismatik
             SaveSettings();
         }
 
-        public override void ReceivedGlobalSettings(ReceivedGlobalSettingsPayload payload) {
+        public override void ReceivedGlobalSettings(ReceivedGlobalSettingsPayload payload)
+        { 
             if (payload?.Settings != null && payload.Settings.Count > 0)
             {
                 this.global = payload.Settings.ToObject<GlobalSettings>();
@@ -113,43 +114,8 @@ namespace sibalzer.streamdeck.prismatik
         {
             return Connection.SetSettingsAsync(JObject.FromObject(settings));
         }
-        private async Task ApiSetProfilAction(int desiredState = -1)
-        {
-            try
-            {
-                var currProfil = PrismatikApiClient.GetProfile();
 
-                if (desiredState == -1)
-                {
-                    if (currProfil != settings.ProfilA)
-                    {
-                        PrismatikApiClient.SetProfile(settings.ProfilB);
-                    }
-                    else
-                    {
-                        PrismatikApiClient.SetProfile(settings.ProfilA);
-                    }
-                }
-                else
-                {
-                    if(desiredState == 0)
-                    {
-                        PrismatikApiClient.SetProfile(settings.ProfilA);
-                    }
-                    else
-                    {
-                        PrismatikApiClient.SetProfile(settings.ProfilB);
-                    }
-                }
-                    
-
-            }
-            catch (Exception)
-            {
-                PrismatikApiClient.PRISMATIC_CLIENT?.Dispose();
-                PrismatikApiClient.PRISMATIC_CLIENT = null;
-            }
-        }
+        // Saves the this.global object back the this.global settings
         private void SetGlobalSettings()
         {
             Connection.SetGlobalSettingsAsync(JObject.FromObject(this.global));

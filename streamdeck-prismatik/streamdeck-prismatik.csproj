@@ -70,7 +70,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\PrismatikApi.cs" />
+    <Compile Include="Actions\SetOnOffAction.cs" />
+    <Compile Include="Actions\SetProfilAction.cs" />
+    <Compile Include="Common\GlobalSettings.cs" />
+    <Compile Include="Common\PrismatikApi.cs" />
     <Compile Include="Actions\SwitchProfilAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,6 +117,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
