@@ -2,33 +2,30 @@ name: Nightly Release
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [windows-latest]
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '4.7.2'
-    - name: Restore dependencies
-      run: |
-        cd streamdeck-prismatik
-        dotnet restore
-    - name: Build
-      run: dotnet build --no-restore --configuration Release
-    - name: Publish Nightly 
-      uses: marvinpinto/action-automatic-releases@latest
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: "Development Build"
-        files: |
-          LICENSE.txt
-          streamdeck-prismatik/bin/Release/*
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.2
+        with:
+          vs-version: "16.7.2"
+      - name: Build
+        run: |
+          MSBuild.exe $Env:GITHUB_WORKSPACE\streamdeck-prismatik.sln /property:Configuration=Release
+      - name: Publish Nightly
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            LICENSE.txt
+            streamdeck-prismatik/bin/Release/*
