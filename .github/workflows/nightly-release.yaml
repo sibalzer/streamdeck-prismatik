@@ -39,4 +39,4 @@ jobs:
           title: "Development Build"
           files: |
             LICENSE
-            Release/de.simonbalzer.prismatik.sdPlugin
+            Release/de.simonbalzer.prismatik.streamDeckPlugin
