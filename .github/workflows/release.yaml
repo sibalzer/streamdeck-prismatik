@@ -10,25 +10,37 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Setup release please
+        uses: google-github-actions/release-please-action@v2
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: simple
+          changelog-path: CHANGELOG.md
+          package-name: streamdeck-prismatik
       - name: Add nuget to PATH
+        if: ${{ steps.release.outputs.release_created }}
         uses: nuget/setup-nuget@v1
         with:
           nuget-version: "5.x"
       - name: Add msbuild to PATH
+        if: ${{ steps.release.outputs.release_created }}
         uses: microsoft/setup-msbuild@v1.0.2
         with:
           vs-version: "16.7.2"
       - name: Build
+        if: ${{ steps.release.outputs.release_created }}
         run: |
           nuget restore streamdeck-prismatik.sln
           MSBuild streamdeck-prismatik.sln /property:Configuration=Release /t:restore
       - name: Publish Release
+        if: ${{ steps.release.outputs.release_created }}
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
-          title: "Development Build"
+          title: "Release"
           files: |
             LICENSE.txt
             streamdeck-prismatik/bin/Release/*
