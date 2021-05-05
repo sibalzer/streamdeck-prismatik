@@ -12,7 +12,7 @@ using sibalzer.streamdeck.prismatik.Common;
 
 namespace sibalzer.streamdeck.prismatik
 {
-    [PluginActionId("prismatik_streamdeck.setprofilaction")]
+    [PluginActionId("de.simonbalzer.prismatik.setprofilaction")]
     public class SetProfilAction : PluginBase
     {
         private GlobalSettings global;

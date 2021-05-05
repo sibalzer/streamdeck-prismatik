@@ -31,8 +31,8 @@
   "Icon": "Images/pluginIcon",
   "URL": "https://github.com/sibalzer/streamdeck-prismatik",
   "Version": "1.0",
-  "CodePath": "de.simonbalzer.streamdeck-prismatic",
-  "Category": "[sibalzer] Prismatik Ambilight",
+  "CodePath": "de.simonbalzer.prismatik",
+  "Category": "Prismatik Ambilight",
   "CategoryIcon": "Images/categoryIcon",
   "OS": [
     {

@@ -12,7 +12,7 @@ using sibalzer.streamdeck.prismatik.Common;
 
 namespace sibalzer.streamdeck.prismatik
 {
-    [PluginActionId("prismatik_streamdeck.setonoffsetting")]
+    [PluginActionId("de.simonbalzer.prismatik.setonoffsetting")]
     public class SetOnOffAction : PluginBase
     {
         private GlobalSettings global;

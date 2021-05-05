@@ -12,7 +12,7 @@ using sibalzer.streamdeck.prismatik.Common;
 
 namespace sibalzer.streamdeck.prismatik
 {
-    [PluginActionId("prismatik_streamdeck.switchprofilaction")]
+    [PluginActionId("de.simonbalzer.prismatik.switchprofilaction")]
     public class SwitchProfilAction : PluginBase
     {
 
