@@ -5,7 +5,7 @@ on:
       - master
 jobs:
   build-tag-release:
-    name: Build, tag, and release Docker image
+    name: Build, tag, and release sdPlugin
     runs-on: [windows-latest]
     steps:
       - name: Checkout repository
@@ -43,4 +43,4 @@ jobs:
           title: "Release"
           files: |
             LICENSE.txt
-            streamdeck-prismatik/bin/Release/*
+            streamdeck-prismatik/bin/Release/streamdeck-prismatik.sdPlugin

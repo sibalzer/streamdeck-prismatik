@@ -33,4 +33,4 @@ jobs:
           title: "Development Build"
           files: |
             LICENSE.txt
-            streamdeck-prismatik/bin/Release/*
+            streamdeck-prismatik/bin/Release/sdPlugin
