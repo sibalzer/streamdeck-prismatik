@@ -28,7 +28,7 @@ jobs:
         run: |
           curl.exe --output DistributionToolWindows.zip --url https://developer.elgato.com/documentation/stream-deck/distributiontool/DistributionToolWindows.zip
           7z x DistributionToolWindows.zip
-          DistributionTool.exe -b -i streamdeck-prismatik/bin/Release/de.simonbalzer.prismatik.sdPlugin -o Release
+          ./DistributionTool.exe -b -i streamdeck-prismatik/bin/Release/de.simonbalzer.prismatik.sdPlugin -o Release
       - name: Publish Nightly
         uses: marvinpinto/action-automatic-releases@latest
         with:
