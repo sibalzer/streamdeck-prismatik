@@ -6,7 +6,7 @@ using PrimS.Telnet;
 
 namespace sibalzer.streamdeck.prismatik.Helpers
 {
-    internal static class TeamSpeak3Telnet
+    internal static class PrismatikApiClient
     {
         public static Client PRISMATIC_CLIENT;
         private static readonly object ro_PRISMATIC_CLIENT_LOCK_OBJ = new object();
