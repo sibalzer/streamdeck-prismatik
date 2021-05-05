@@ -21,11 +21,11 @@
       ],
       "SupportedInMultiActions": true,
       "Tooltip": "Toggles the On/Off status.",
-      "UUID": "de.simonbalzer.streamdeck-prismatic.toggleonoff",
+      "UUID": "de.simonbalzer.prismatic.toggleonoff",
       "PropertyInspectorPath": "PropertyInspector/ToggleInputMute/ToggleInputMute.html"
     }
   ],
-  "Author": "sibalzer",
+  "Author": "Simon Balzer",
   "Description": "Allows you to interact with the Prismatik Ambilight via the API with your Stream Deck",
   "Name": "Prismatik Ambilight",
   "Icon": "Images/pluginIcon",
